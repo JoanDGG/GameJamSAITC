@@ -70,6 +70,7 @@ public class MenuPrincipal : MonoBehaviour
         }
     }
 
+    //Habilita la posibilidad de que un jugador cambie de personaje
     public void CambiarPersonaje(int jugador)
     {
         print("El jugador " + jugador.ToString() + " va a cambiar de personaje");
