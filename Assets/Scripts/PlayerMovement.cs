@@ -16,17 +16,26 @@ public class PlayerMovement : MonoBehaviour
 
     public float movementSpeed = 5;
     public float jumpValue = 5;
+    public float vidaMax = 100.0f;
+    public float vidaActual;
 
     public float inputMove;
     public bool inputJump;
     public bool inputAttack;
 
+    public GameObject attack;
+    private BarraResultadosP1 barraResultadosP1;
+    private BarraResultadosP2 barraResultadosP2;
+    
     Vector2 velocity;
     
     // Start is called before the first frame update
     void Start()
     {
         rigidbody2d = GetComponent<Rigidbody2D>();
+        barraResultadosP1 = FindObjectOfType<BarraResultadosP1>();
+        barraResultadosP2 = FindObjectOfType<BarraResultadosP2>();
+        vidaActual = vidaMax;
     }
 
     // Update is called once per frame
@@ -37,18 +46,26 @@ public class PlayerMovement : MonoBehaviour
         {
             inputMove = Input.GetAxis("Horizontal");
             inputJump = Input.GetButtonDown("Jump");
+            inputAttack = Input.GetButtonDown("Fire1");
         }
         //Movimiento personaje 2: izquierda, derecha, arriba
         else if (gameObject.name == "Personaje2")
         {
             inputMove = Input.GetAxis("Horizontal_P2");
             inputJump = Input.GetButtonDown("Jump_P2");
+            inputAttack = Input.GetButtonDown("Fire2");
         }
-        //inputAttack = Input.GetMouseButtonDown(0);
-        
+        //Input.GetMouseButtonDown(0);
+
         if (inputJump)
         {
             Jump(jumpValue);
+        }
+
+        if(inputAttack)
+        {
+            attack.SetActive(true);
+            StartCoroutine(Atacar());
         }
 
         rigidbody2d.velocity = new Vector2(inputMove * movementSpeed, rigidbody2d.velocity.y);
@@ -109,10 +126,21 @@ public class PlayerMovement : MonoBehaviour
         //}
     }
 
-    void FixedUpdate()
+    private void OnTriggerEnter2D(Collider2D other)
     {
-
-        
+        if (other.gameObject.name == "Hitbox" && other.gameObject != attack)
+        {
+            print("Ataque!");
+            vidaActual -= 5.0f;
+            if (gameObject.name == "Personaje1")
+            {
+                barraResultadosP1.SetValue(vidaActual / vidaMax);
+            }
+            else if (gameObject.name == "Personaje2")
+            {
+                barraResultadosP2.SetValue(vidaActual / vidaMax);
+            }
+        }
     }
 
     void Flip()
@@ -140,5 +168,11 @@ public class PlayerMovement : MonoBehaviour
             //Debug.Log("Jump");
             //Debug.Log(force);
         }
+    }
+
+    public IEnumerator Atacar()
+    {
+        yield return new WaitForSeconds(0.3f);
+        attack.SetActive(false);
     }
 }
