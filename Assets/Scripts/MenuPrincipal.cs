@@ -51,7 +51,10 @@ public class MenuPrincipal : MonoBehaviour
         {
             print("Personaje Seleccionado");
             GameObject boton = (GameObject)GameObject.Find("Canvas/Personajes/Personaje" + personaje.ToString() + "/Text");
+            GameObject imagen = (GameObject)GameObject.Find("Canvas/Personajes/Personaje" + personaje.ToString());
             print("El jugador " + GameManager.jugador.ToString() + " seleccionó a " + boton.GetComponent<Text>().text);
+            GameObject Jugador = (GameObject)GameObject.Find("Canvas/Jugadores/Jugador" + GameManager.jugador.ToString() + "/imagenPersonaje");
+            Jugador.GetComponent<Image>().sprite = imagen.GetComponent<Image>().sprite;
             GameManager.personajesSeleccionados[GameManager.jugador - 1] = personaje;
             bool Continuar = GameManager.personajesSeleccionados.Contains(0);
             continuar.SetActive(!Continuar);
@@ -74,5 +77,6 @@ public class MenuPrincipal : MonoBehaviour
         GameManager.personajesSeleccionados[GameManager.jugador - 1] = 0;
         continuar.SetActive(false);
         textoAnuncio.text = ("El jugador " + GameManager.jugador.ToString() + " está seleccionando personaje");
+        //Cambiar imágen del jugador al IDLE
     }
 }
