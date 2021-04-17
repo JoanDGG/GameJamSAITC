@@ -729,6 +729,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   continuar: {fileID: 0}
+  cambios:
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &1417827930
 MonoBehaviour:
   m_ObjectHideFlags: 0
