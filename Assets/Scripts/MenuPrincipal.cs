@@ -40,12 +40,19 @@ public class MenuPrincipal : MonoBehaviour
     //Proceso de selección de personajes
     public void SeleccionarPersonaje(int personaje)
     {
-        print("Personaje Seleccionado");
-        GameObject boton = (GameObject) GameObject.Find("Canvas/Personaje"+personaje.ToString() + "/Text");
-        print("El jugador " + GameManager.jugador.ToString() + " seleccionó a " + boton.GetComponent<Text>().text);
-        GameManager.personajesSeleccionados[GameManager.jugador - 1] = personaje;
-        bool Continuar = (GameManager.jugador >= 2) ? true : false;
-        continuar.SetActive(Continuar);
-        GameManager.jugador += 1;
+        if (GameManager.jugador == 1 || GameManager.jugador == 2)
+        {
+            print("Personaje Seleccionado");
+            GameObject boton = (GameObject)GameObject.Find("Canvas/Personaje" + personaje.ToString() + "/Text");
+            print("El jugador " + GameManager.jugador.ToString() + " seleccionó a " + boton.GetComponent<Text>().text);
+            GameManager.personajesSeleccionados[GameManager.jugador - 1] = personaje;
+            bool Continuar = (GameManager.jugador >= 2) ? true : false;
+            continuar.SetActive(Continuar);
+            GameManager.jugador += 1;
+        }
+        else
+        {
+            print("No puedes seleccionar más");
+        }
     }
 }
