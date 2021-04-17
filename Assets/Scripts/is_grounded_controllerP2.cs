@@ -9,15 +9,15 @@ Este script revisa si el personaje entra en contacto con alguna zona con el tag 
 Autor: Joan Daniel Guerrero Garcia
 */
 
-public class is_grounded_controller : MonoBehaviour
+public class is_grounded_controllerP2 : MonoBehaviour
 {
-    public static bool is_grounded;
+    public static bool is_grounded_P2;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Piso"))
         {
-            is_grounded = true;
+            is_grounded_P2 = true;
             //print("Esta en piso");
         }
     }
@@ -26,7 +26,7 @@ public class is_grounded_controller : MonoBehaviour
     {
         if (other.CompareTag("Piso"))
         {
-            is_grounded = false;
+            is_grounded_P2 = false;
             //print("No esta en piso");
         }
     }

@@ -32,32 +32,49 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Movimiento personaje 1: A, D, espacio
+        //Movimiento personaje 1: A, D, W
         if (gameObject.name == "Personaje1")
         {
-            if (Input.GetKey("d") || Input.GetKey("a"))
-            {
-                rigidbody2d.velocity = new Vector2(Input.GetAxis("Horizontal") * movementSpeed, rigidbody2d.velocity.y);
-            }
+            inputMove = Input.GetAxis("Horizontal");
             inputJump = Input.GetButtonDown("Jump");
         }
-        //Movimiento personaje 2: izquierda, derecha, click izquierdo
+        //Movimiento personaje 2: izquierda, derecha, arriba
         else if (gameObject.name == "Personaje2")
         {
-            if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow))
-            {
-                rigidbody2d.velocity = new Vector2(Input.GetAxis("Horizontal") * movementSpeed, rigidbody2d.velocity.y);
-            }
-            inputJump = Input.GetMouseButtonDown(0);
+            inputMove = Input.GetAxis("Horizontal_P2");
+            inputJump = Input.GetButtonDown("Jump_P2");
         }
-
+        //inputAttack = Input.GetMouseButtonDown(0);
+        
         if (inputJump)
         {
             Jump(jumpValue);
         }
 
-        //inputAttack = Input.GetMouseButtonDown(0);
+        rigidbody2d.velocity = new Vector2(inputMove * movementSpeed, rigidbody2d.velocity.y);
 
+        if ((inputMove > 0.0f && !facingRight) || (inputMove < 0.0f && facingRight))
+        {
+            Flip();
+        }
+
+        if (movingRight)
+        {
+            rigidbody2d.velocity = new Vector2(movementSpeed, rigidbody2d.velocity.y);
+            if (!facingRight)
+            {
+                Flip();
+            }
+
+        }
+        if (movingLeft)
+        {
+            rigidbody2d.velocity = new Vector2(-movementSpeed, rigidbody2d.velocity.y);
+            if (facingRight)
+            {
+                Flip();
+            }
+        }
         //if (inputAttack || is_attacking)
         //{
         //    if (first_attack)
@@ -94,28 +111,8 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        if ((inputMove > 0.0f && !facingRight) || (inputMove < 0.0f && facingRight))
-        {
-            Flip();
-        }
 
-        if (movingRight)
-        {
-            rigidbody2d.velocity = new Vector2(movementSpeed, rigidbody2d.velocity.y);
-            if (!facingRight)
-            {
-                Flip();
-            }
-            
-        }
-        if (movingLeft)
-        {
-            rigidbody2d.velocity = new Vector2(-movementSpeed, rigidbody2d.velocity.y);
-            if (facingRight)
-            {
-                Flip();
-            }
-        }
+        
     }
 
     void Flip()
@@ -131,12 +128,17 @@ public class PlayerMovement : MonoBehaviour
 
     public void Jump(float force)
     {
-        if (is_grounded_controller.is_grounded)
+        if (gameObject.name == "Personaje1" && is_grounded_controller.is_grounded)
         {
             rigidbody2d.AddForce(Vector3.up * force, ForceMode2D.Impulse);
             //Debug.Log("Jump");
             //Debug.Log(force);
         }
-
+        else if (gameObject.name == "Personaje2" && is_grounded_controllerP2.is_grounded_P2)
+        {
+            rigidbody2d.AddForce(Vector3.up * force, ForceMode2D.Impulse);
+            //Debug.Log("Jump");
+            //Debug.Log(force);
+        }
     }
 }
