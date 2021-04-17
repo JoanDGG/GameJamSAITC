@@ -193,7 +193,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Nombre Pendiente
+  m_Text: Yaoyotl (pendiente)
 --- !u!222 &342434055
 CanvasRenderer:
   m_ObjectHideFlags: 0
