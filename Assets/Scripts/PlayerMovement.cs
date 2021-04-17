@@ -32,14 +32,31 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        inputMove = Input.GetAxis("Horizontal");
-        inputJump = Input.GetButtonDown("Jump");
-        //inputAttack = Input.GetMouseButtonDown(0);
-        
+        //Movimiento personaje 1: A, D, espacio
+        if (gameObject.name == "Personaje1")
+        {
+            if (Input.GetKey("d") || Input.GetKey("a"))
+            {
+                rigidbody2d.velocity = new Vector2(Input.GetAxis("Horizontal") * movementSpeed, rigidbody2d.velocity.y);
+            }
+            inputJump = Input.GetButtonDown("Jump");
+        }
+        //Movimiento personaje 2: izquierda, derecha, click izquierdo
+        else if (gameObject.name == "Personaje2")
+        {
+            if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow))
+            {
+                rigidbody2d.velocity = new Vector2(Input.GetAxis("Horizontal") * movementSpeed, rigidbody2d.velocity.y);
+            }
+            inputJump = Input.GetMouseButtonDown(0);
+        }
+
         if (inputJump)
         {
             Jump(jumpValue);
         }
+
+        //inputAttack = Input.GetMouseButtonDown(0);
 
         //if (inputAttack || is_attacking)
         //{
@@ -77,9 +94,6 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-
-        rigidbody2d.velocity = new Vector2(inputMove * movementSpeed, rigidbody2d.velocity.y);
-
         if ((inputMove > 0.0f && !facingRight) || (inputMove < 0.0f && facingRight))
         {
             Flip();
@@ -124,12 +138,5 @@ public class PlayerMovement : MonoBehaviour
             //Debug.Log(force);
         }
 
-    }
-
-    public void Release()
-    {
-        movingLeft = false;
-        movingRight = false;
-        //Debug.Log("Stop");
     }
 }
