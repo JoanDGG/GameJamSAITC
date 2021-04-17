@@ -353,7 +353,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1417827929}
         m_TargetAssemblyTypeName: MenuPrincipal, Assembly-CSharp
-        m_MethodName: Jugar
+        m_MethodName: Avanzar
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
