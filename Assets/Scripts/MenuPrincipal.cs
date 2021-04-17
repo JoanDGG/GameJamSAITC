@@ -50,7 +50,7 @@ public class MenuPrincipal : MonoBehaviour
         if (GameManager.personajesSeleccionados.Contains(0))
         {
             print("Personaje Seleccionado");
-            GameObject boton = (GameObject)GameObject.Find("Canvas/Personaje" + personaje.ToString() + "/Text");
+            GameObject boton = (GameObject)GameObject.Find("Canvas/Personajes/Personaje" + personaje.ToString() + "/Text");
             print("El jugador " + GameManager.jugador.ToString() + " seleccionó a " + boton.GetComponent<Text>().text);
             GameManager.personajesSeleccionados[GameManager.jugador - 1] = personaje;
             bool Continuar = GameManager.personajesSeleccionados.Contains(0);
