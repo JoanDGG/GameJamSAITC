@@ -68,7 +68,7 @@ public class PlayerMovementP2 : MonoBehaviour
 
         //Input.GetMouseButtonDown(0);
         anim.SetBool("Agachado", inputCrouch);
-        anim.SetBool("EnPiso", is_grounded_controller.is_grounded);
+        anim.SetBool("EnPiso", is_grounded_controllerP2.is_grounded_P2);
 
         if (inputJump)
         {
@@ -245,6 +245,7 @@ public class PlayerMovementP2 : MonoBehaviour
         //Hace más daño y rompe la defensa del oponente
         print("Ataque Fuerte");
         yield return new WaitForSeconds(0.7f);
+        anim.SetBool("Ataque", false);
     }
 
     //Ataque mientras esté agachado
