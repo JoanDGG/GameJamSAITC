@@ -19,6 +19,7 @@ public class Proyectil : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        transform.position = new Vector2(transform.position.x, -10);
         Destroy(gameObject);
     }
 
