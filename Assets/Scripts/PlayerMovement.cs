@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     public bool facingRight = true;
     private bool movingRight = false;
     private bool movingLeft = false;
+    private Animator anim;
     public GameObject proyectiles;
     public GameObject anuncio;
     public GameObject texto;
@@ -42,6 +43,7 @@ public class PlayerMovement : MonoBehaviour
         rigidbody2d = GetComponent<Rigidbody2D>();
         barraResultadosP1 = FindObjectOfType<BarraResultadosP1>();
         GameManager.saludes[0] = vidaMax;
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -60,31 +62,39 @@ public class PlayerMovement : MonoBehaviour
         inputStrongAttack = Input.GetKeyDown("left alt");
         inputSpecial = Input.GetKeyDown("e");
         inputShield = Input.GetKey("q");
-        
+
         //Input.GetMouseButtonDown(0);
+
+        anim.SetBool("Agachado", inputCrouch);
+        anim.SetBool("EnPiso", is_grounded_controller.is_grounded);
 
         if (inputJump)
         {
             Jump(jumpValue);
+            anim.SetBool("EnPiso", false);
         }
 
         if(inputAttack)
         {
             attack.SetActive(true);
+            anim.SetBool("Ataque", true);
             StartCoroutine(Atacar());
         }
 
         if (inputStrongAttack)
         {
             attack.SetActive(true);
+            anim.SetBool("Ataque", true);
             StartCoroutine(AtaqueFuerte());
         }
 
         if (inputSpecial)
         {
             attack.SetActive(true);
+            anim.SetBool("AtaqueEspecial", true);
             StartCoroutine(AtaqueEspecial());
         }
+
 
         if (inputShield)
         {
@@ -217,6 +227,7 @@ public class PlayerMovement : MonoBehaviour
         }
         yield return new WaitForSeconds(0.3f);
         attack.SetActive(false);
+        anim.SetBool("Ataque", false);
     }
     
     //Ataque básico
@@ -263,6 +274,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
         yield return new WaitForSeconds(0.3f);
+        anim.SetBool("Ataque", false);
     }
 
     void AtaqueEspecialBajo()
