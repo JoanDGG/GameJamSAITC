@@ -13,6 +13,7 @@ public class PlayerMovementP2 : MonoBehaviour
     public GameObject proyectiles;
     public GameObject anuncio;
     public GameObject texto;
+    public GameObject escudo;
 
     //private bool is_attacking = false;
 
@@ -21,7 +22,6 @@ public class PlayerMovementP2 : MonoBehaviour
     public float movementSpeed = 5;
     public float jumpValue = 5;
     public float vidaMax = 100.0f;
-    public float vidaActual;
 
     public float inputMove;
     public bool inputJump;
@@ -29,6 +29,7 @@ public class PlayerMovementP2 : MonoBehaviour
     public bool inputCrouch;
     public bool inputStrongAttack;
     public bool inputSpecial;
+    public bool inputShield;
 
     public GameObject attack;
     private BarraResultadosP2 barraResultadosP2;
@@ -42,7 +43,7 @@ public class PlayerMovementP2 : MonoBehaviour
         Flip();
         rigidbody2d = GetComponent<Rigidbody2D>();
         barraResultadosP2 = FindObjectOfType<BarraResultadosP2>();
-        vidaActual = vidaMax;
+        GameManager.saludes[1] = vidaMax;
     }
 
     // Update is called once per frame
@@ -61,6 +62,7 @@ public class PlayerMovementP2 : MonoBehaviour
         inputAttack = Input.GetButtonDown("Fire2");
         inputStrongAttack = Input.GetKeyDown("page up");
         inputSpecial = Input.GetKeyDown("page down");
+        inputShield = Input.GetKey("right shift");
 
         //Input.GetMouseButtonDown(0);
 
@@ -85,6 +87,17 @@ public class PlayerMovementP2 : MonoBehaviour
         {
             attack.SetActive(true);
             StartCoroutine(AtaqueProyectil());
+        }
+
+        if (inputShield)
+        {
+            print("Escudo");
+            escudo.SetActive(true);
+        }
+        else
+        {
+            print("No Escudo");
+            escudo.SetActive(false);
         }
 
         rigidbody2d.velocity = new Vector2(inputMove * movementSpeed, rigidbody2d.velocity.y);
@@ -150,16 +163,16 @@ public class PlayerMovementP2 : MonoBehaviour
         if (other.gameObject.name == "Hitbox" && other.gameObject != attack)
         {
             print("Ataque!");
-            vidaActual -= 5.0f;
-            barraResultadosP2.SetValue(vidaActual / vidaMax);
+            GameManager.saludes[1] -= 5.0f;
+            barraResultadosP2.SetValue(GameManager.saludes[1] / vidaMax);
         }
         else if (other.gameObject.tag == "Proyectil")
         {
             print("Proyectil ha dado en el blanco!");
-            vidaActual -= 3.0f;
-            barraResultadosP2.SetValue(vidaActual / vidaMax);
+            GameManager.saludes[1] -= 3.0f;
+            barraResultadosP2.SetValue(GameManager.saludes[1] / vidaMax);
         }
-        if (vidaActual <= 0)
+        if (GameManager.saludes[1] <= 0)
         {
             Perder();
         }

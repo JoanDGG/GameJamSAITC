@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     public GameObject proyectiles;
     public GameObject anuncio;
     public GameObject texto;
+    public GameObject escudo;
 
     //private bool is_attacking = false;
 
@@ -21,7 +22,6 @@ public class PlayerMovement : MonoBehaviour
     public float movementSpeed = 5;
     public float jumpValue = 5;
     public float vidaMax = 100.0f;
-    public float vidaActual;
 
     public float inputMove;
     public bool inputJump;
@@ -29,6 +29,7 @@ public class PlayerMovement : MonoBehaviour
     public bool inputCrouch;
     public bool inputStrongAttack;
     public bool inputSpecial;
+    public bool inputShield;
 
     public GameObject attack;
     private BarraResultadosP1 barraResultadosP1;
@@ -40,7 +41,7 @@ public class PlayerMovement : MonoBehaviour
     {
         rigidbody2d = GetComponent<Rigidbody2D>();
         barraResultadosP1 = FindObjectOfType<BarraResultadosP1>();
-        vidaActual = vidaMax;
+        GameManager.saludes[0] = vidaMax;
     }
 
     // Update is called once per frame
@@ -57,7 +58,8 @@ public class PlayerMovement : MonoBehaviour
         inputCrouch = Input.GetKey("s");
         inputAttack = Input.GetButtonDown("Fire1");
         inputStrongAttack = Input.GetKeyDown("left alt");
-        inputSpecial = Input.GetKeyDown("c");
+        inputSpecial = Input.GetKeyDown("e");
+        inputShield = Input.GetKey("q");
         
         //Input.GetMouseButtonDown(0);
 
@@ -82,6 +84,17 @@ public class PlayerMovement : MonoBehaviour
         {
             attack.SetActive(true);
             StartCoroutine(AtaqueProyectil());
+        }
+
+        if (inputShield)
+        {
+            print("Escudo");
+            escudo.SetActive(true);
+        }
+        else
+        {
+            print("No Escudo");
+            escudo.SetActive(false);
         }
 
         rigidbody2d.velocity = new Vector2(inputMove * movementSpeed, rigidbody2d.velocity.y);
@@ -147,16 +160,16 @@ public class PlayerMovement : MonoBehaviour
         if (other.gameObject.name == "Hitbox" && other.gameObject != attack)
         {
             print("Ataque!");
-            vidaActual -= 5.0f;
-            barraResultadosP1.SetValue(vidaActual / vidaMax);
+            GameManager.saludes[0] -= 5.0f;
+            barraResultadosP1.SetValue(GameManager.saludes[0] / vidaMax);
         }
         else if (other.gameObject.tag == "Proyectil")
         {
             print("Proyectil ha dado en el blanco!");
-            vidaActual -= 3.0f;
-            barraResultadosP1.SetValue(vidaActual / vidaMax);
+            GameManager.saludes[0] -= 1.5f;
+            barraResultadosP1.SetValue(GameManager.saludes[0] / vidaMax);
         }
-        if (vidaActual <= 0)
+        if (GameManager.saludes[0] <= 0)
         {
             Perder();
         }
@@ -207,7 +220,7 @@ public class PlayerMovement : MonoBehaviour
         yield return new WaitForSeconds(0.3f);
         attack.SetActive(false);
     }
-
+    
     //Ataque básico
     void AtaqueNormal()
     {
