@@ -1218,7 +1218,7 @@ MonoBehaviour:
   proyectiles: {fileID: 8848190448629807480, guid: 241bd2588ff2e6942860fa3b69369950, type: 3}
   anuncio: {fileID: 591869612}
   texto: {fileID: 2017564822}
-  escudo: {fileID: 1894396234}
+  escudo: {fileID: 0}
   movementSpeed: 5
   jumpValue: 5
   vidaMax: 100
@@ -1343,7 +1343,6 @@ Transform:
   - {fileID: 1305814860}
   - {fileID: 2062442688}
   - {fileID: 1166159266}
-  - {fileID: 1894396238}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -11009,7 +11008,7 @@ GameObject:
   - component: {fileID: 2062442688}
   - component: {fileID: 2062442689}
   m_Layer: 0
-  m_Name: Hitbox
+  m_Name: Hitbox2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
