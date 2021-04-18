@@ -1853,6 +1853,15 @@ MonoBehaviour:
   cambios:
   - {fileID: 0}
   - {fileID: 0}
+  personajes:
+  - Quetzalcoatl
+  - Tlaloc
+  - Kauil
+  Textospersonajes_2:
+  - "Considerado el dios m\uFFFDs poderoso en todo mesoam\uFFFDrica, la serpiente
+    emplumada es el dios creador de los mortales."
+  - Adorado por los mexicas, Tlaloc es el dios invocador de lluvia y truenos.
+  - Deidad del fuego, Kauil representa gobernantes y el poder entre los mayas.
 --- !u!114 &1417827930
 MonoBehaviour:
   m_ObjectHideFlags: 0
