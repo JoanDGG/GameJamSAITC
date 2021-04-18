@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMovementP2 : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class PlayerMovementP2 : MonoBehaviour
     private bool movingRight = false;
     private bool movingLeft = false;
     public GameObject proyectiles;
+    public GameObject anuncio;
+    public GameObject texto;
 
     //private bool is_attacking = false;
 
@@ -32,6 +35,8 @@ public class PlayerMovementP2 : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Time.timeScale = 1.0f;
+        Flip();
         rigidbody2d = GetComponent<Rigidbody2D>();
         barraResultadosP2 = FindObjectOfType<BarraResultadosP2>();
         vidaActual = vidaMax;
@@ -129,6 +134,12 @@ public class PlayerMovementP2 : MonoBehaviour
             print("Proyectil ha dado en el blanco!");
             vidaActual -= 3.0f;
             barraResultadosP2.SetValue(vidaActual / vidaMax);
+        }
+        if (vidaActual <= 0)
+        {
+            Time.timeScale=0.0f;
+            anuncio.SetActive(true);
+            texto.GetComponent<Text>().text = "Ha ganado el jugador 1";
         }
     }
 

@@ -16,9 +16,14 @@ public class MenuPrincipal : MonoBehaviour
     void Start()
     {
         GameManager.jugador = 1;
-        anuncio = (GameObject) GameObject.Find("Canvas/AnuncioJugador");
-        textoAnuncio = anuncio.GetComponent<Text>();
-        textoAnuncio.text = ("El jugador " + GameManager.jugador.ToString() + " está seleccionando personaje");
+        GameManager.personajesSeleccionados[0] = 0;
+        GameManager.personajesSeleccionados[1] = 0;
+        if (GameManager.escena == 1)
+        {
+            anuncio = (GameObject)GameObject.Find("Canvas/AnuncioJugador");
+            textoAnuncio = anuncio.GetComponent<Text>();
+            textoAnuncio.text = ("El jugador " + GameManager.jugador.ToString() + " está seleccionando personaje");
+        }
     }
     
     //Jugador seleccionó un botón que progresa el juego, hace transición de la escena actual a la siguiente

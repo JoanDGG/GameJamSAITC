@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class PlayerMovement : MonoBehaviour
     private bool movingRight = false;
     private bool movingLeft = false;
     public GameObject proyectiles;
+    public GameObject anuncio;
+    public GameObject texto;
 
     //private bool is_attacking = false;
 
@@ -129,6 +132,12 @@ public class PlayerMovement : MonoBehaviour
             print("Proyectil ha dado en el blanco!");
             vidaActual -= 3.0f;
             barraResultadosP1.SetValue(vidaActual / vidaMax);
+        }
+        if (vidaActual <= 0)
+        {
+            Time.timeScale=0.0f;
+            anuncio.SetActive(true);
+            texto.GetComponent<Text>().text = "Ha ganado el jugador 2";
         }
     }
 
