@@ -57,7 +57,7 @@ public class PlayerMovementP2 : MonoBehaviour
         //Movimiento personaje 2: izquierda, derecha, arriba
         inputMove = Input.GetAxis("Horizontal_P2");
         inputJump = Input.GetButtonDown("Jump_P2");
-        inputCrouch = Input.GetKeyDown("down");
+        inputCrouch = Input.GetKey("down");
         inputAttack = Input.GetButtonDown("Fire2");
         inputStrongAttack = Input.GetKeyDown("page up");
         inputSpecial = Input.GetKeyDown("page down");
@@ -195,7 +195,7 @@ public class PlayerMovementP2 : MonoBehaviour
 
     public IEnumerator Atacar()
     {
-        if (!is_grounded_controller.is_grounded)
+        if (!is_grounded_controllerP2.is_grounded_P2)
         {
             AtaqueAire();
         }
@@ -215,12 +215,14 @@ public class PlayerMovementP2 : MonoBehaviour
     void AtaqueNormal()
     {
         //Hace daño
+        print("Ataque Normal");
     }
 
     //Ataque con input extra (Shift)
     public IEnumerator AtaqueFuerte()
     {
         //Hace más daño y rompe la defensa del oponente
+        print("Ataque Fuerte");
         yield return new WaitForSeconds(0.7f);
     }
 
@@ -228,12 +230,14 @@ public class PlayerMovementP2 : MonoBehaviour
     void AtaqueBajo()
     {
         //Hace menos daño que el ataque normal
+        print("Ataque bajo");
     }
 
     //Ataque mientras esté en el aire
     void AtaqueAire()
     {
         //Hace más daño que el ataque normal, pero menos que el fuerte
+        print("Ataque Aéreo");
     }
 
     //Ataque especial

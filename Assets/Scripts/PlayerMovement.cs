@@ -54,7 +54,7 @@ public class PlayerMovement : MonoBehaviour
         //Movimiento personaje 1: A, D, W
         inputMove = Input.GetAxis("Horizontal");
         inputJump = Input.GetButtonDown("Jump");
-        inputCrouch = Input.GetKeyDown("s");
+        inputCrouch = Input.GetKey("s");
         inputAttack = Input.GetButtonDown("Fire1");
         inputStrongAttack = Input.GetKeyDown("left alt");
         inputSpecial = Input.GetKeyDown("c");
@@ -212,12 +212,14 @@ public class PlayerMovement : MonoBehaviour
     void AtaqueNormal()
     {
         //Hace daño
+        print("Ataque Normal");
     }
 
     //Ataque con input extra (Shift)
     public IEnumerator AtaqueFuerte()
     {
         //Hace más daño y rompe la defensa del oponente
+        print("Ataque fuerte");
         yield return new WaitForSeconds(0.7f);
     }
 
@@ -225,12 +227,14 @@ public class PlayerMovement : MonoBehaviour
     void AtaqueBajo()
     {
         //Hace menos daño que el ataque normal
+        print("Ataque bajo");
     }
 
     //Ataque mientras esté en el aire
     void AtaqueAire()
     {
         //Hace más daño que el ataque normal, pero menos que el fuerte
+        print("Ataque Aéreo");
     }
 
     //Ataque especial
