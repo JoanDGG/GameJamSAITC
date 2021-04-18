@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,6 +13,9 @@ public class MenuPrincipal : MonoBehaviour
     private GameObject anuncio;
     private Text textoAnuncio;
     public GameObject[] cambios = new GameObject[2];
+
+    public string[] personajes = { "Quetzalcoatl", "Tlaloc", "Kauil" };
+    public string[] Textospersonajes = { "Texto 1", "Texto 2", "Texto 3" };
 
     void Start()
     {
@@ -59,6 +63,9 @@ public class MenuPrincipal : MonoBehaviour
             GameObject imagen = (GameObject)GameObject.Find("Canvas/Personajes/Personaje" + personaje.ToString());
             print("El jugador " + GameManager.jugador.ToString() + " seleccionó a " + boton.GetComponent<Text>().text);
             GameObject Jugador = (GameObject)GameObject.Find("Canvas/Jugadores/Jugador" + GameManager.jugador.ToString() + "/imagenPersonaje");
+            GameObject TextoPersonaje = (GameObject)GameObject.Find("Canvas/Jugadores/Jugador" + GameManager.jugador.ToString() + "/TextoJugador");
+            int index = (boton.GetComponent<Text>().text == "Quetzalcoatl") ? (Array.IndexOf(personajes, boton.GetComponent<Text>().text) + 1) : (Array.IndexOf(personajes, boton.GetComponent<Text>().text));
+            TextoPersonaje.GetComponent<Text>().text = Textospersonajes[index];
             Jugador.GetComponent<Image>().sprite = imagen.GetComponent<Image>().sprite;
             GameManager.personajesSeleccionados[GameManager.jugador - 1] = personaje;
             bool Continuar = GameManager.personajesSeleccionados.Contains(0);
