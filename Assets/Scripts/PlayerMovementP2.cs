@@ -244,7 +244,7 @@ public class PlayerMovementP2 : MonoBehaviour
         //Hace m�s da�o y rompe la defensa del oponente
         print("Ataque Fuerte");
         yield return new WaitForSeconds(0.7f);
-        anim.SetBool("Ataque", false);
+        child.GetComponent<Animator>().SetBool("Ataque", false);
     }
 
     //Ataque mientras est� agachado
