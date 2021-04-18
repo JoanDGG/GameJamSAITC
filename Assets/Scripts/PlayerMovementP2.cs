@@ -9,6 +9,7 @@ public class PlayerMovementP2 : MonoBehaviour
     public bool facingRight = true;
     private bool movingRight = false;
     private bool movingLeft = false;
+    public GameObject proyectiles;
 
     //private bool is_attacking = false;
 
@@ -155,6 +156,16 @@ public class PlayerMovementP2 : MonoBehaviour
     public IEnumerator Atacar()
     {
         yield return new WaitForSeconds(0.3f);
+        GameObject proyectil = (GameObject)Instantiate(proyectiles);
+        if (!facingRight)
+        {
+            proyectil.transform.Rotate(Vector3.up, 180.0f, Space.World);
+        }
+        float velocidad = 3.0f;
+        float distancia = 1.5f;
+        Rigidbody2D rigidbody2dProyectil = proyectil.GetComponent<Rigidbody2D>();
+        rigidbody2dProyectil.velocity = (facingRight) ? new Vector2(velocidad, rigidbody2dProyectil.velocity.y) : new Vector2(-velocidad, rigidbody2dProyectil.velocity.y);
+        proyectil.transform.position = (facingRight) ? new Vector2(transform.position.x + distancia, transform.position.y) : new Vector2(transform.position.x - distancia, transform.position.y);
         attack.SetActive(false);
     }
 }
