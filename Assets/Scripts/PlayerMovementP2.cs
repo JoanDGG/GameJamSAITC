@@ -26,6 +26,9 @@ public class PlayerMovementP2 : MonoBehaviour
     public float inputMove;
     public bool inputJump;
     public bool inputAttack;
+    public bool inputCrouch;
+    public bool inputStrongAttack;
+    public bool inputSpecial;
 
     public GameObject attack;
     private BarraResultadosP2 barraResultadosP2;
@@ -54,7 +57,10 @@ public class PlayerMovementP2 : MonoBehaviour
         //Movimiento personaje 2: izquierda, derecha, arriba
         inputMove = Input.GetAxis("Horizontal_P2");
         inputJump = Input.GetButtonDown("Jump_P2");
+        inputCrouch = Input.GetKeyDown("down");
         inputAttack = Input.GetButtonDown("Fire2");
+        inputStrongAttack = Input.GetKeyDown("page up");
+        inputSpecial = Input.GetKeyDown("page down");
 
         //Input.GetMouseButtonDown(0);
 
@@ -67,6 +73,18 @@ public class PlayerMovementP2 : MonoBehaviour
         {
             attack.SetActive(true);
             StartCoroutine(Atacar());
+        }
+
+        if (inputStrongAttack)
+        {
+            attack.SetActive(true);
+            StartCoroutine(AtaqueFuerte());
+        }
+
+        if (inputSpecial)
+        {
+            attack.SetActive(true);
+            StartCoroutine(AtaqueProyectil());
         }
 
         rigidbody2d.velocity = new Vector2(inputMove * movementSpeed, rigidbody2d.velocity.y);
@@ -177,17 +195,60 @@ public class PlayerMovementP2 : MonoBehaviour
 
     public IEnumerator Atacar()
     {
+        if (!is_grounded_controller.is_grounded)
+        {
+            AtaqueAire();
+        }
+        else if (inputCrouch)
+        {
+            AtaqueBajo();
+        }
+        else
+        {
+            AtaqueNormal();
+        }
         yield return new WaitForSeconds(0.3f);
+        attack.SetActive(false);
+    }
+
+    //Ataque básico
+    void AtaqueNormal()
+    {
+        //Hace daño
+    }
+
+    //Ataque con input extra (Shift)
+    public IEnumerator AtaqueFuerte()
+    {
+        //Hace más daño y rompe la defensa del oponente
+        yield return new WaitForSeconds(0.7f);
+    }
+
+    //Ataque mientras esté agachado
+    void AtaqueBajo()
+    {
+        //Hace menos daño que el ataque normal
+    }
+
+    //Ataque mientras esté en el aire
+    void AtaqueAire()
+    {
+        //Hace más daño que el ataque normal, pero menos que el fuerte
+    }
+
+    //Ataque especial
+    public IEnumerator AtaqueProyectil()
+    {
         GameObject proyectil = (GameObject)Instantiate(proyectiles);
         if (!facingRight)
         {
             proyectil.transform.Rotate(Vector3.up, 180.0f, Space.World);
         }
         float velocidad = 3.0f;
-        float distancia = 1.5f;
+        float distancia = 1.75f;
         Rigidbody2D rigidbody2dProyectil = proyectil.GetComponent<Rigidbody2D>();
         rigidbody2dProyectil.velocity = (facingRight) ? new Vector2(velocidad, rigidbody2dProyectil.velocity.y) : new Vector2(-velocidad, rigidbody2dProyectil.velocity.y);
         proyectil.transform.position = (facingRight) ? new Vector2(transform.position.x + distancia, transform.position.y) : new Vector2(transform.position.x - distancia, transform.position.y);
-        attack.SetActive(false);
+        yield return new WaitForSeconds(0.2f);
     }
 }
