@@ -233,34 +233,34 @@ public class PlayerMovement : MonoBehaviour
         child.GetComponent<Animator>().SetBool("Ataque", false);
     }
     
-    //Ataque básico
+    //Ataque bï¿½sico
     void AtaqueNormal()
     {
-        //Hace daño
+        //Hace daï¿½o
         print("Ataque Normal");
     }
 
     //Ataque con input extra (Shift)
     public IEnumerator AtaqueFuerte()
     {
-        //Hace más daño y rompe la defensa del oponente
+        //Hace mï¿½s daï¿½o y rompe la defensa del oponente
         print("Ataque fuerte");
         yield return new WaitForSeconds(0.7f);
         child.GetComponent<Animator>().SetBool("Ataque", false);
     }
 
-    //Ataque mientras esté agachado
+    //Ataque mientras estï¿½ agachado
     void AtaqueBajo()
     {
-        //Hace menos daño que el ataque normal
+        //Hace menos daï¿½o que el ataque normal
         print("Ataque bajo");
     }
 
-    //Ataque mientras esté en el aire
+    //Ataque mientras estï¿½ en el aire
     void AtaqueAire()
     {
-        //Hace más daño que el ataque normal, pero menos que el fuerte
-        print("Ataque Aéreo");
+        //Hace mï¿½s daï¿½o que el ataque normal, pero menos que el fuerte
+        print("Ataque Aï¿½reo");
     }
 
     ////Ataque especial
