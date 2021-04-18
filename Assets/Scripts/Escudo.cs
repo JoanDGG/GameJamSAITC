@@ -35,7 +35,7 @@ public class Escudo : MonoBehaviour
         }
         else if (other.gameObject.tag == "Proyectil")
         {
-            print("Proyectil ha dado en el blanco!");
+            print("Proyectil ha dado en el Escudo!");
             GameManager.saludes[jugador] -= 0.75f;
             if (jugador == 0)
             {

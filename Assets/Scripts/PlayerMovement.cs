@@ -88,12 +88,10 @@ public class PlayerMovement : MonoBehaviour
 
         if (inputShield)
         {
-            print("Escudo");
             escudo.SetActive(true);
         }
         else
         {
-            print("No Escudo");
             escudo.SetActive(false);
         }
 
@@ -157,13 +155,13 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.name == "Hitbox" && other.gameObject != attack)
+        if (other.gameObject.name == "Hitbox" && other.gameObject != attack && !inputShield)
         {
             print("Ataque!");
             GameManager.saludes[0] -= 5.0f;
             barraResultadosP1.SetValue(GameManager.saludes[0] / vidaMax);
         }
-        else if (other.gameObject.tag == "Proyectil")
+        else if (other.gameObject.tag == "Proyectil" && !inputShield)
         {
             print("Proyectil ha dado en el blanco!");
             GameManager.saludes[0] -= 1.5f;

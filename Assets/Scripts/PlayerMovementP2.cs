@@ -91,12 +91,10 @@ public class PlayerMovementP2 : MonoBehaviour
 
         if (inputShield)
         {
-            print("Escudo");
             escudo.SetActive(true);
         }
         else
         {
-            print("No Escudo");
             escudo.SetActive(false);
         }
 
@@ -160,16 +158,17 @@ public class PlayerMovementP2 : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.name == "Hitbox" && other.gameObject != attack)
+        if (other.gameObject.name == "Hitbox" && other.gameObject != attack && !inputShield)
         {
             print("Ataque!");
             GameManager.saludes[1] -= 5.0f;
             barraResultadosP2.SetValue(GameManager.saludes[1] / vidaMax);
         }
-        else if (other.gameObject.tag == "Proyectil")
+        else if (other.gameObject.tag == "Proyectil" && !inputShield)
         {
             print("Proyectil ha dado en el blanco!");
             GameManager.saludes[1] -= 3.0f;
+            print("Sin escudo");
             barraResultadosP2.SetValue(GameManager.saludes[1] / vidaMax);
         }
         if (GameManager.saludes[1] <= 0)
