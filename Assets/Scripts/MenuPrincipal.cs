@@ -15,7 +15,9 @@ public class MenuPrincipal : MonoBehaviour
     public GameObject[] cambios = new GameObject[2];
 
     public string[] personajes = { "Quetzalcoatl", "Tlaloc", "Kauil" };
-    public string[] Textospersonajes = { "Texto 1", "Texto 2", "Texto 3" };
+    public string[] Textospersonajes_2 = { "Considerado el dios más poderoso en todo mesoamérica, la serpiente emplumada es el dios creador de los mortales.",
+                                         "Adorado por los mexicas, Tlaloc es el dios invocador de lluvia y truenos.",
+                                         "Deidad del fuego, Kauil representa gobernantes y el poder entre los mayas." };
 
     void Start()
     {
@@ -65,7 +67,7 @@ public class MenuPrincipal : MonoBehaviour
             GameObject Jugador = (GameObject)GameObject.Find("Canvas/Jugadores/Jugador" + GameManager.jugador.ToString() + "/imagenPersonaje");
             GameObject TextoPersonaje = (GameObject)GameObject.Find("Canvas/Jugadores/Jugador" + GameManager.jugador.ToString() + "/TextoJugador");
             int index = (boton.GetComponent<Text>().text == "Quetzalcoatl") ? (Array.IndexOf(personajes, boton.GetComponent<Text>().text) + 1) : (Array.IndexOf(personajes, boton.GetComponent<Text>().text));
-            TextoPersonaje.GetComponent<Text>().text = Textospersonajes[index];
+            TextoPersonaje.GetComponent<Text>().text = Textospersonajes_2[index];
             Jugador.GetComponent<Image>().sprite = imagen.GetComponent<Image>().sprite;
             GameManager.personajesSeleccionados[GameManager.jugador - 1] = personaje;
             bool Continuar = GameManager.personajesSeleccionados.Contains(0);
