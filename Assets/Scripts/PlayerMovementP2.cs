@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovementP2 : MonoBehaviour
 {
     private Rigidbody2D rigidbody2d;
 
@@ -24,26 +24,26 @@ public class PlayerMovement : MonoBehaviour
     public bool inputAttack;
 
     public GameObject attack;
-    private BarraResultadosP1 barraResultadosP1;
-    
+    private BarraResultadosP2 barraResultadosP2;
+
     Vector2 velocity;
-    
+
     // Start is called before the first frame update
     void Start()
     {
         rigidbody2d = GetComponent<Rigidbody2D>();
-        barraResultadosP1 = FindObjectOfType<BarraResultadosP1>();
+        barraResultadosP2 = FindObjectOfType<BarraResultadosP2>();
         vidaActual = vidaMax;
     }
 
     // Update is called once per frame
     void Update()
     {
-        //Movimiento personaje 1: A, D, W
-        inputMove = Input.GetAxis("Horizontal");
-        inputJump = Input.GetButtonDown("Jump");
-        inputAttack = Input.GetButtonDown("Fire1");
-        
+        //Movimiento personaje 2: izquierda, derecha, arriba
+        inputMove = Input.GetAxis("Horizontal_P2");
+        inputJump = Input.GetButtonDown("Jump_P2");
+        inputAttack = Input.GetButtonDown("Fire2");
+
         //Input.GetMouseButtonDown(0);
 
         if (inputJump)
@@ -51,7 +51,7 @@ public class PlayerMovement : MonoBehaviour
             Jump(jumpValue);
         }
 
-        if(inputAttack)
+        if (inputAttack)
         {
             attack.SetActive(true);
             StartCoroutine(Atacar());
@@ -121,13 +121,13 @@ public class PlayerMovement : MonoBehaviour
         {
             print("Ataque!");
             vidaActual -= 5.0f;
-            barraResultadosP1.SetValue(vidaActual / vidaMax);
+            barraResultadosP2.SetValue(vidaActual / vidaMax);
         }
         else if (other.gameObject.tag == "Proyectil")
         {
             print("Proyectil ha dado en el blanco!");
             vidaActual -= 3.0f;
-            barraResultadosP1.SetValue(vidaActual / vidaMax);
+            barraResultadosP2.SetValue(vidaActual / vidaMax);
         }
     }
 
@@ -144,7 +144,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void Jump(float force)
     {
-        if (is_grounded_controller.is_grounded)
+        if (is_grounded_controllerP2.is_grounded_P2)
         {
             rigidbody2d.AddForce(Vector3.up * force, ForceMode2D.Impulse);
             //Debug.Log("Jump");
