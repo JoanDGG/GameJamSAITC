@@ -86,7 +86,7 @@ public class PlayerMovementP2 : MonoBehaviour
         if (inputSpecial)
         {
             attack.SetActive(true);
-            StartCoroutine(AtaqueProyectil());
+            StartCoroutine(AtaqueEspecial());
         }
 
         if (inputShield)
@@ -253,6 +253,32 @@ public class PlayerMovementP2 : MonoBehaviour
     }
 
     //Ataque especial
+    public IEnumerator AtaqueEspecial()
+    {
+        if (is_grounded_controller.is_grounded)
+        {
+            if (inputCrouch)
+            {
+                AtaqueEspecialBajo();
+            }
+            else
+            {
+                AtaqueEspecialNormal();
+            }
+        }
+        yield return new WaitForSeconds(0.3f);
+    }
+
+    void AtaqueEspecialBajo()
+    {
+        print("AtaqueEspecialBajo");
+    }
+
+    void AtaqueEspecialNormal()
+    {
+        print("AtaqueEspecialNormal");
+    }
+
     public IEnumerator AtaqueProyectil()
     {
         GameObject proyectil = (GameObject)Instantiate(proyectiles);
