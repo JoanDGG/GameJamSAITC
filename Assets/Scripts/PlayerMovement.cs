@@ -167,7 +167,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.name == "Hitbox" && other.gameObject != attack && !inputShield)
+        if (other.gameObject.name == "Hitbox2" && !inputShield)
         {
             print("Ataque!");
             GameManager.saludes[0] -= 5.0f;
