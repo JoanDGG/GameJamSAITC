@@ -91,7 +91,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (inputSpecial)
         {
-            attack.SetActive(true);
+            //attack.SetActive(true);
             child.GetComponent<Animator>().SetBool("AtaqueEspecial", true);
             StartCoroutine(AtaqueEspecial());
         }
@@ -167,7 +167,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.name == "Hitbox" && other.gameObject != attack && !inputShield)
+        print("Collision");
+        if (other.gameObject.name == "Hitbox1" && !inputShield)
         {
             print("Ataque!");
             GameManager.saludes[0] -= 5.0f;
