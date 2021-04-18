@@ -274,7 +274,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
         yield return new WaitForSeconds(0.3f);
-        anim.SetBool("Ataque", false);
+        anim.SetBool("AtaqueEspecial", false);
     }
 
     void AtaqueEspecialBajo()
