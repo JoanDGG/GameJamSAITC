@@ -15,7 +15,7 @@ public class MenuPrincipal : MonoBehaviour
     public GameObject[] cambios = new GameObject[2];
 
     public string[] personajes = { "Quetzalcoatl", "Tlaloc", "Kauil" };
-    public string[] Textospersonajes_2 = { "Considerado el dios más poderoso en todo mesoamérica, la serpiente emplumada es el dios creador de los mortales.",
+    public string[] Textospersonajes_2 = { "Considerado el dios mï¿½s poderoso en todo mesoamï¿½rica, la serpiente emplumada es el dios creador de los mortales.",
                                          "Adorado por los mexicas, Tlaloc es el dios invocador de lluvia y truenos.",
                                          "Deidad del fuego, Kauil representa gobernantes y el poder entre los mayas." };
 
@@ -28,11 +28,12 @@ public class MenuPrincipal : MonoBehaviour
         {
             anuncio = (GameObject)GameObject.Find("Canvas/AnuncioJugador");
             textoAnuncio = anuncio.GetComponent<Text>();
-            textoAnuncio.text = ("El jugador " + GameManager.jugador.ToString() + " está seleccionando personaje");
+            textoAnuncio.text = ("El jugador " + GameManager.jugador.ToString() + " estÃ¡ seleccionando personaje");
+            print(textoAnuncio);
         }
     }
     
-    //Jugador seleccionó un botón que progresa el juego, hace transición de la escena actual a la siguiente
+    //Jugador seleccionï¿½ un botï¿½n que progresa el juego, hace transiciï¿½n de la escena actual a la siguiente
     public void Avanzar()
     {
         print("Avanzando de escena");
@@ -40,7 +41,7 @@ public class MenuPrincipal : MonoBehaviour
         SceneManager.LoadScene(GameManager.escena);
     }
 
-    //Jugador seleccionó un botón que retrasa el juego, hace transición de la escena actual a la anterior
+    //Jugador seleccionï¿½ un botï¿½n que retrasa el juego, hace transiciï¿½n de la escena actual a la anterior
     public void Retroceder()
     {
         print("Retrocediendo de escena");
@@ -48,14 +49,14 @@ public class MenuPrincipal : MonoBehaviour
         SceneManager.LoadScene(GameManager.escena);
     }
 
-    //Jugador seleccionó salir, el juego se cierra
+    //Jugador seleccionï¿½ salir, el juego se cierra
     public void Salir()
     {
         print("Gracias por jugar");
         Application.Quit();
     }
 
-    //Proceso de selección de personajes
+    //Proceso de selecciï¿½n de personajes
     public void SeleccionarPersonaje(int personaje)
     {
         if (GameManager.personajesSeleccionados.Contains(0))
@@ -63,7 +64,7 @@ public class MenuPrincipal : MonoBehaviour
             print("Personaje Seleccionado");
             GameObject boton = (GameObject)GameObject.Find("Canvas/Personajes/Personaje" + personaje.ToString() + "/Text");
             GameObject imagen = (GameObject)GameObject.Find("Canvas/Personajes/Personaje" + personaje.ToString());
-            print("El jugador " + GameManager.jugador.ToString() + " seleccionó a " + boton.GetComponent<Text>().text);
+            print("El jugador " + GameManager.jugador.ToString() + " seleccionï¿½ a " + boton.GetComponent<Text>().text);
             GameObject Jugador = (GameObject)GameObject.Find("Canvas/Jugadores/Jugador" + GameManager.jugador.ToString() + "/imagenPersonaje");
             GameObject TextoPersonaje = (GameObject)GameObject.Find("Canvas/Jugadores/Jugador" + GameManager.jugador.ToString() + "/TextoJugador");
             int index = (boton.GetComponent<Text>().text == "Quetzalcoatl") ? (Array.IndexOf(personajes, boton.GetComponent<Text>().text) + 1) : (Array.IndexOf(personajes, boton.GetComponent<Text>().text));
@@ -74,13 +75,13 @@ public class MenuPrincipal : MonoBehaviour
             continuar.SetActive(!Continuar);
             cambios[GameManager.jugador - 1].SetActive(true);
             GameManager.jugador += 1;
-            textoAnuncio.text = (GameManager.personajesSeleccionados.Contains(0)) ? ("El jugador " + GameManager.jugador.ToString() + " está seleccionando personaje") : ("Personajes seleccionados");
+            textoAnuncio.text = (GameManager.personajesSeleccionados.Contains(0)) ? ("El jugador " + GameManager.jugador.ToString() + " estï¿½ seleccionando personaje") : ("Personajes seleccionados");
         }
         else
         {
             continuar.SetActive(true);
             textoAnuncio.text = ("Personajes seleccionados");
-            print("No puedes seleccionar más");
+            print("No puedes seleccionar mï¿½s");
         }
     }
 
@@ -91,7 +92,7 @@ public class MenuPrincipal : MonoBehaviour
         GameManager.jugador = jugador;
         GameManager.personajesSeleccionados[GameManager.jugador - 1] = 0;
         continuar.SetActive(false);
-        textoAnuncio.text = ("El jugador " + GameManager.jugador.ToString() + " está seleccionando personaje");
-        //Cambiar imágen del jugador al IDLE
+        textoAnuncio.text = ("El jugador " + GameManager.jugador.ToString() + " estï¿½ seleccionando personaje");
+        //Cambiar imï¿½gen del jugador al IDLE
     }
 }
