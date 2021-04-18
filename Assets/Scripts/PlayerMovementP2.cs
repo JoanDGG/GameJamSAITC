@@ -265,7 +265,7 @@ public class PlayerMovementP2 : MonoBehaviour
     //Ataque especial
     public IEnumerator AtaqueEspecial()
     {
-        if (is_grounded_controller.is_grounded)
+        if (is_grounded_controllerP2.is_grounded_P2)
         {
             if (inputCrouch)
             {
