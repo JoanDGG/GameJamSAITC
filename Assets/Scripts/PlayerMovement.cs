@@ -10,7 +10,6 @@ public class PlayerMovement : MonoBehaviour
     public bool facingRight = true;
     private bool movingRight = false;
     private bool movingLeft = false;
-    private Animator anim;
     public GameObject proyectiles;
     public GameObject anuncio;
     public GameObject texto;
@@ -33,6 +32,7 @@ public class PlayerMovement : MonoBehaviour
     public bool inputShield;
 
     public GameObject attack;
+    public GameObject child;
     private BarraResultadosP1 barraResultadosP1;
     
     Vector2 velocity;
@@ -43,7 +43,7 @@ public class PlayerMovement : MonoBehaviour
         rigidbody2d = GetComponent<Rigidbody2D>();
         barraResultadosP1 = FindObjectOfType<BarraResultadosP1>();
         GameManager.saludes[0] = vidaMax;
-        anim = GetComponent<Animator>();
+        //anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -65,33 +65,33 @@ public class PlayerMovement : MonoBehaviour
 
         //Input.GetMouseButtonDown(0);
 
-        anim.SetBool("Agachado", inputCrouch);
-        anim.SetBool("EnPiso", is_grounded_controller.is_grounded);
+        child.GetComponent<Animator>().SetBool("Agachado", inputCrouch);
+        child.GetComponent<Animator>().SetBool("EnPiso", is_grounded_controller.is_grounded);
 
         if (inputJump)
         {
             Jump(jumpValue);
-            anim.SetBool("EnPiso", false);
+            child.GetComponent<Animator>().SetBool("EnPiso", false);
         }
 
         if(inputAttack)
         {
             attack.SetActive(true);
-            anim.SetBool("Ataque", true);
+            child.GetComponent<Animator>().SetBool("Ataque", true);
             StartCoroutine(Atacar());
         }
 
         if (inputStrongAttack)
         {
             attack.SetActive(true);
-            anim.SetBool("Ataque", true);
+            child.GetComponent<Animator>().SetBool("Ataque", true);
             StartCoroutine(AtaqueFuerte());
         }
 
         if (inputSpecial)
         {
             attack.SetActive(true);
-            anim.SetBool("AtaqueEspecial", true);
+            child.GetComponent<Animator>().SetBool("AtaqueEspecial", true);
             StartCoroutine(AtaqueEspecial());
         }
 
@@ -106,6 +106,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         rigidbody2d.velocity = new Vector2(inputMove * movementSpeed, rigidbody2d.velocity.y);
+        
 
         if ((inputMove > 0.0f && !facingRight) || (inputMove < 0.0f && facingRight))
         {
@@ -227,7 +228,7 @@ public class PlayerMovement : MonoBehaviour
         }
         yield return new WaitForSeconds(0.3f);
         attack.SetActive(false);
-        anim.SetBool("Ataque", false);
+        child.GetComponent<Animator>().SetBool("Ataque", false);
     }
     
     //Ataque básico
@@ -274,7 +275,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
         yield return new WaitForSeconds(0.3f);
-        anim.SetBool("AtaqueEspecial", false);
+        child.GetComponent<Animator>().SetBool("AtaqueEspecial", false);
     }
 
     void AtaqueEspecialBajo()
