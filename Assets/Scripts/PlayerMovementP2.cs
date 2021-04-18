@@ -45,6 +45,12 @@ public class PlayerMovementP2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if (transform.position.y <= -3)
+        {
+            Perder();
+        }
+
         //Movimiento personaje 2: izquierda, derecha, arriba
         inputMove = Input.GetAxis("Horizontal_P2");
         inputJump = Input.GetButtonDown("Jump_P2");
@@ -137,9 +143,7 @@ public class PlayerMovementP2 : MonoBehaviour
         }
         if (vidaActual <= 0)
         {
-            Time.timeScale=0.0f;
-            anuncio.SetActive(true);
-            texto.GetComponent<Text>().text = "Ha ganado el jugador 1";
+            Perder();
         }
     }
 
@@ -147,6 +151,13 @@ public class PlayerMovementP2 : MonoBehaviour
     {
         facingRight = !facingRight;
         transform.Rotate(Vector3.up, 180.0f, Space.World);
+    }
+
+    void Perder()
+    {
+        Time.timeScale = 0.0f;
+        anuncio.SetActive(true);
+        texto.GetComponent<Text>().text = "Ha ganado el jugador 1";
     }
 
     //public void Attack()
