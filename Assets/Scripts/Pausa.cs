@@ -21,6 +21,7 @@ public class Pausa : MonoBehaviour
 
     public void CambiarAMenu() {
         SceneManager.LoadScene("Menu");
+        GameManager.escena = 0;
     }
 
     public void Continuar() {
