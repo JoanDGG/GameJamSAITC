@@ -45,6 +45,7 @@ public class PlayerMovementP2 : MonoBehaviour
         rigidbody2d = GetComponent<Rigidbody2D>();
         barraResultadosP2 = FindObjectOfType<BarraResultadosP2>();
         GameManager.saludes[1] = vidaMax;
+        child.GetComponent<Animator>().SetInteger("Personaje", GameManager.personajesSeleccionados[1]);
     }
 
     // Update is called once per frame

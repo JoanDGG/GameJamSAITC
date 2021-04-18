@@ -43,6 +43,7 @@ public class PlayerMovement : MonoBehaviour
         rigidbody2d = GetComponent<Rigidbody2D>();
         barraResultadosP1 = FindObjectOfType<BarraResultadosP1>();
         GameManager.saludes[0] = vidaMax;
+        child.GetComponent<Animator>().SetInteger("Personaje", GameManager.personajesSeleccionados[0]);
         //anim = GetComponent<Animator>();
     }
 
