@@ -67,7 +67,7 @@ public class PlayerMovementP2 : MonoBehaviour
 
         //Input.GetMouseButtonDown(0);
         child.GetComponent<Animator>().SetBool("Agachado", inputCrouch);
-        child.GetComponent<Animator>().SetBool("EnPiso", is_grounded_controller.is_grounded);
+        child.GetComponent<Animator>().SetBool("EnPiso", is_grounded_controllerP2.is_grounded_P2);
 
         if (inputJump)
         {
@@ -231,39 +231,40 @@ public class PlayerMovementP2 : MonoBehaviour
         child.GetComponent<Animator>().SetBool("Ataque", false);
     }
 
-    //Ataque básico
+    //Ataque bï¿½sico
     void AtaqueNormal()
     {
-        //Hace daño
+        //Hace daï¿½o
         print("Ataque Normal");
     }
 
     //Ataque con input extra (Shift)
     public IEnumerator AtaqueFuerte()
     {
-        //Hace más daño y rompe la defensa del oponente
+        //Hace mï¿½s daï¿½o y rompe la defensa del oponente
         print("Ataque Fuerte");
         yield return new WaitForSeconds(0.7f);
+        anim.SetBool("Ataque", false);
     }
 
-    //Ataque mientras esté agachado
+    //Ataque mientras estï¿½ agachado
     void AtaqueBajo()
     {
-        //Hace menos daño que el ataque normal
+        //Hace menos daï¿½o que el ataque normal
         print("Ataque bajo");
     }
 
-    //Ataque mientras esté en el aire
+    //Ataque mientras estï¿½ en el aire
     void AtaqueAire()
     {
-        //Hace más daño que el ataque normal, pero menos que el fuerte
-        print("Ataque Aéreo");
+        //Hace mï¿½s daï¿½o que el ataque normal, pero menos que el fuerte
+        print("Ataque Aï¿½reo");
     }
 
     //Ataque especial
     public IEnumerator AtaqueEspecial()
     {
-        if (is_grounded_controller.is_grounded)
+        if (is_grounded_controllerP2.is_grounded_P2)
         {
             if (inputCrouch)
             {

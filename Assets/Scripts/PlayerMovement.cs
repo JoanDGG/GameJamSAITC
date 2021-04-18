@@ -244,6 +244,7 @@ public class PlayerMovement : MonoBehaviour
         //Hace más daño y rompe la defensa del oponente
         print("Ataque fuerte");
         yield return new WaitForSeconds(0.7f);
+        anim.SetBool("Ataque", false);
     }
 
     //Ataque mientras esté agachado
