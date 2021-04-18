@@ -92,7 +92,7 @@ public class MenuPrincipal : MonoBehaviour
         GameManager.jugador = jugador;
         GameManager.personajesSeleccionados[GameManager.jugador - 1] = 0;
         continuar.SetActive(false);
-        textoAnuncio.text = ("El jugador " + GameManager.jugador.ToString() + " est� seleccionando personaje");
+        textoAnuncio.text = ("El jugador " + GameManager.jugador.ToString() + " está seleccionando personaje");
         //Cambiar im�gen del jugador al IDLE
     }
 }
