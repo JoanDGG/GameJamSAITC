@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: bb474cf0132f32b4595ee73c5c31ce78
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - PapaKilo
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 4062afb93802ff841b33d7781424c945, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
