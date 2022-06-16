@@ -16,14 +16,20 @@ public class FireFollow : MonoBehaviour
     public Vector2 maxXandY;                // Maximum values of x & y to move the object
     public Vector2 minXandY;                // Maximum values of x & y to move the object
 
-    private Vector3 mousePosition;          // Actual position of the mouse (viewed from the camera perspective)
-
     private Vector3 smoothedPosition;       // Current direction the object has to move smoothly
+
+    float horizontalMovement = 0f;
+    float verticalMovement = 0f;
+    public float movementSpeed = 60f;
+    Vector2 movementVector;
+
+    private Rigidbody2D rigidbody2d;
 
     void Awake()
     {
         offset = new Vector3(0, yOffset, 0);
         //offset = new Vector3(xOffset, yOffset, 0);
+        rigidbody2d = GetComponent<Rigidbody2D>();
     }
 
     bool CheckXMargin()     // Check if the coordinate x of the player is greater than the x margin
@@ -38,15 +44,37 @@ public class FireFollow : MonoBehaviour
 
     void FixedUpdate()
     {
-        TrackMouse();
+        if (gameObject.name.Contains("P1"))
+        {
+            horizontalMovement = ((Input.GetKey("d")) ? 1 : (Input.GetKey("a")) ? -1 : 0);
+            verticalMovement = ((Input.GetKey("w")) ? 1 : (Input.GetKey("s")) ? -1 : 0);
+            TrackMovement();
+        }
+        else if (gameObject.name.Contains("P2"))
+        {
+            horizontalMovement = ((Input.GetKey("right")) ? 1 : (Input.GetKey("left")) ? -1 : 0);
+            verticalMovement = ((Input.GetKey("up")) ? 1 : (Input.GetKey("down")) ? -1 : 0);
+            TrackMovement();
+        }
+        else
+        {
+            TrackMouse();
+        }
     }
 
-    void TrackMouse()
+    private void TrackMovement()
     {
-        mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset;
-        if(CheckXMargin() && CheckYMargin())
+        movementVector = new Vector2(horizontalMovement * movementSpeed, 
+                                     verticalMovement * movementSpeed);
+        rigidbody2d.AddForce(movementVector * movementSpeed * Time.deltaTime);
+    }
+
+    private void TrackMouse()
+    {
+        movementVector = Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset;
+        if (CheckXMargin() && CheckYMargin())
         {
-            smoothedPosition = Vector2.Lerp(transform.position, mousePosition, smooth * Time.deltaTime);
+            smoothedPosition = Vector2.Lerp(transform.position, movementVector, smooth * Time.deltaTime);
         }
         float smoothedPositionX = smoothedPosition.x;
         float smoothedPositionY = smoothedPosition.y;
