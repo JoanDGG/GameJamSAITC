@@ -1313,6 +1313,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1528775897}
     m_Modifications:
+    - target: {fileID: 4748770772824260557, guid: 429949e6007de9f4490f6cd16e73d71f, type: 3}
+      propertyPath: fadeTime
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4748770772824260558, guid: 429949e6007de9f4490f6cd16e73d71f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4748770772824260559, guid: 429949e6007de9f4490f6cd16e73d71f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4748770772824260559, guid: 429949e6007de9f4490f6cd16e73d71f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4748770772824260559, guid: 429949e6007de9f4490f6cd16e73d71f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 180
+      objectReference: {fileID: 0}
     - target: {fileID: 4748770774367404494, guid: 429949e6007de9f4490f6cd16e73d71f, type: 3}
       propertyPath: m_Name
       value: Cielo
